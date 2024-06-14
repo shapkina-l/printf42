@@ -84,4 +84,16 @@ int main()
         printf("OK\n\n");
     else 
         printf("ERROR\n\n");
+
+    printf("test11\n");
+    int a = 123;
+    int *ptr = &a;
+    i = printf("%p\n", ptr);
+    j = ft_printf("%p\n", ptr);
+    printf("%d\n",i);
+    printf("%d\n",j);
+    if (i == j)
+        printf("OK\n\n");
+    else 
+        printf("ERROR\n\n");
 }

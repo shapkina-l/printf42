@@ -6,7 +6,7 @@
 /*   By: lshapkin <lshapkin@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 16:19:11 by lshapkin          #+#    #+#             */
-/*   Updated: 2024/06/11 17:05:19 by lshapkin         ###   ########.fr       */
+/*   Updated: 2024/06/14 18:05:40 by lshapkin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ int ft_num_len_ptr(unsigned long long nb)
     int len;
 
     len = 0;
-    if (nb == 0)
-        len = 1;
-    while (nb != 0)
+    if (nb >= 16)
     {
-        len ++;
-        nb/= 16;
+        len += ft_num_len_ptr(nb / 16);
+        len += ft_num_len_ptr(nb % 16);
     }
+    else
+        len++;
     return (len);
 }
 
 int ft_putptr(unsigned long long nb)
 {
-    unsigned int nbr;
+    unsigned long long nbr;
     char *str;
     int i;
 
@@ -50,6 +50,8 @@ int ft_putptr(unsigned long long nb)
             str[i--] = nb % 16 + 87;
         nb /= 16;
     }
+    ft_putstr("0x");
     ft_putstr(str);
-    return (ft_num_len_ptr(nbr));
+    free(str);
+    return (ft_num_len_ptr(nbr) + 2);
 }
